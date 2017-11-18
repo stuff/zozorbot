@@ -26,7 +26,7 @@ class Wwc extends Botmodule {
           throw res.err;
         }
 
-        bot.reply(`Congratulations! You made 5 points for your team!`, message);
+        bot.reply(`Congratulations! ${res.body.points} more points for your team!`, message);
 
       } catch(e) {
         console.log(e);

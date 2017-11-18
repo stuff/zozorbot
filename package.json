@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "shipit production deploy"
   },
   "author": "",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "superagent": "^3.8.1"
   },
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "shipit-cli": "^3.0.0"
   }
 }
