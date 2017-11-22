@@ -38,6 +38,10 @@ class Wwc extends Botmodule {
         bot.reply(`Congratulations! ${res.body.points} more points for your team!`, message);
 
       } catch(e) {
+        if (e.status === 409) {
+          bot.reply(`Nice! But this content was already posted! No more points!`, message);
+          return;
+        }
         bot.logError(e.message);
       }
     });
