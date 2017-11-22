@@ -33,13 +33,15 @@ class Botmodule {
       const messageInfo = await message.getInfo();
       const { text } = messageInfo;
 
-      if (
-        (this.channels !== '*' && !this.channels.includes(messageInfo.channel.name))
-      ) {
+      if ((this.channels !== '*' && !this.channels.includes(messageInfo.channel.name))) {
         return;
       }
 
       if (!text) {
+        return;
+      }
+
+      if (this.config.jail_channel && messageInfo.channel.name !== this.config.jail_channel) {
         return;
       }
 
@@ -50,10 +52,6 @@ class Botmodule {
       if (!dispatchEvent) {
         return;
       }
-
-      // if (typeFilters && !typeFilters.includes(messageInfo.type) && (typeFilters[0] !== Message.MESSAGE_RECEIVED)) {
-      //   return;
-      // }
 
       let firstMatch = null;
       const isMatching = regexStrings.every((regexString, n) => {
