@@ -28,13 +28,9 @@ module.exports = function (shipit) {
     shipit.remoteCopy('config.json', currentPath);
   });
 
-  shipit.blTask('restart_bot', () => {
-    return shipit.remote(`pm2 stop ${config.deploy.process_name_id} && pm2 start ./slackbot/current/index.js --name "${config.deploy.process_name_id}"`);
-  });
-
   /* ---- */
 
   shipit.on('deployed', () => {
-    shipit.start('yarn_install', 'install_config', 'restart_bot');
+    shipit.start('yarn_install', 'install_config');
   });
 };
