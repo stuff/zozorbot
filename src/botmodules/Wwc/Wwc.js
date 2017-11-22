@@ -12,14 +12,23 @@ class Wwc extends Botmodule {
         return;
       }
 
+      const endpoint = this.moduleConfig.add_slackpost_endpoint;
+      const body = {
+        userEmail: message.user.profile.email,
+        postUrl: message.file.permalink,
+        createdAt: Date.now(),
+      };
+
+      if (!this.config.isProduction) {
+        bot.log(endpoint);
+        bot.log(JSON.stringify(body, null, 4));
+        return;
+      }
+
       try {
         const res = await request
-          .post(this.config.add_slackpost_endpoint)
-          .send({
-            userEmail: message.user.profile.email,
-            postUrl: message.file.permalink,
-            createdAt: Date.now(),
-          })
+          .post(endpoint)
+          .send(body)
           .set('Accept', 'application/json');
 
         if (res.err) {
@@ -29,7 +38,7 @@ class Wwc extends Botmodule {
         bot.reply(`Congratulations! ${res.body.points} more points for your team!`, message);
 
       } catch(e) {
-        console.log(e);
+        bot.logError(e.message);
       }
     });
   }

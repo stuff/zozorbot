@@ -59,9 +59,8 @@ class Bot {
       const stats = fs.lstatSync(p);
       if (stats.isDirectory()) {
         const Module = require(p);
-        const config = this.config[Module.id];
 
-        const botmodule = new Module(this, config);
+        const botmodule = new Module(this, Module.id, this.config);
 
         botmodule.init();
       }

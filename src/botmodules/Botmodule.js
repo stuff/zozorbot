@@ -3,11 +3,12 @@ const SlackClient = require('@slack/client');
 const Message = require('../Message');
 
 class Botmodule {
-  constructor(bot, config = {}) {
+  constructor(bot, id, config = {}) {
     this.bot = bot;
     this.config = config;
+    this.moduleConfig = config[id];
 
-    this.channels = this.config.channel ? this.config.channel.split(',') : '*';
+    this.channels = this.moduleConfig.channel ? this.moduleConfig.channel.split(',') : '*';
   }
 
   on(messageType, callback) {
@@ -32,7 +33,9 @@ class Botmodule {
       const messageInfo = await message.getInfo();
       const { text } = messageInfo;
 
-      if (this.channels !== '*' && !this.channels.includes(messageInfo.channel.name)) {
+      if (
+        (this.channels !== '*' && !this.channels.includes(messageInfo.channel.name))
+      ) {
         return;
       }
 
