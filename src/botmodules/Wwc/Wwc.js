@@ -35,7 +35,7 @@ class Wwc extends Botmodule {
           throw res.err;
         }
 
-        bot.reply(`Congratulations! ${res.body.points} more points for your team!`, message);
+        bot.reply(`Congratulations! ${res.body.points} more ${(res.body.points > 1) ? 'points' : 'point' } for your team!`, message);
 
       } catch(e) {
         if (e.status === 409) {
