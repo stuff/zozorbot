@@ -2,6 +2,8 @@ const SlackClient = require('@slack/client');
 
 const Message = require('../Message');
 
+const { CLIENT_EVENTS } = SlackClient;
+
 class Botmodule {
   constructor(bot, id, config = {}) {
     this.bot = bot;
@@ -9,6 +11,10 @@ class Botmodule {
     this.moduleConfig = config[id];
 
     this.channels = this.moduleConfig.channel ? this.moduleConfig.channel.split(',') : '*';
+
+    this.bot.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
+      this.bot.log(`:robot_face: *${this.id}* Botmodule loaded.`);
+    });
   }
 
   on(messageType, callback) {

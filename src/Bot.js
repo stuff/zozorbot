@@ -13,8 +13,6 @@ class Bot {
 
     this.messageCallbacks = [];
 
-    this.loadBotModules();
-
     this.rtm = new RtmClient(this.config.bot_token);
     this.web = new WebClient(this.config.bot_token);
 
@@ -32,7 +30,7 @@ class Bot {
     });
 
     this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
-      this.log(`I'm alive!`);
+      this.log(`:white_check_mark: I'm alive!`);
     });
 
     this.rtm.on(RTM_EVENTS.MESSAGE, async (messageInfo) => {
@@ -44,6 +42,8 @@ class Bot {
         }
       });
     });
+
+    this.loadBotModules();
   }
 
   loadBotModules() {
@@ -62,6 +62,7 @@ class Bot {
 
         const botmodule = new Module(this, Module.id, this.config);
 
+        botmodule.id = Module.id;
         botmodule.init();
       }
     });
