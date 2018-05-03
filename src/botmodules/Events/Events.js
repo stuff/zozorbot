@@ -1,11 +1,15 @@
 const request = require('superagent');
-// const calendario = require('calendario');
-// const ical2json = require('ical2json');
+const Sherlock = require('sherlockjs');
 const ICAL = require('ical.js');
 var dateFns = require('date-fns')
 
 const Botmodule = require('../Botmodule');
 // const Message = require('../../Message');
+
+const stringMatcher = {
+  remote: /Télétravail -/,
+  off: /Congé payé -/,
+}
 
 class Events extends Botmodule {
   async init() {
@@ -18,31 +22,67 @@ class Events extends Botmodule {
 
     // say all events in the channel
     this.schedule('0 9 * * *', () => {
-      this.sayEvents();
+      this.sayEvents(new Date());
+    });
+
+    this.hears('who.*(off|remote) ([^\?]+)', (bot, { match }) => {
+      const [, what, when] = match;
+      const { startDate } = Sherlock.parse(when);
+      if (!startDate) {
+        const channelName = this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
+        this.bot.say(`Well... It's embarrassing, I don't understand *${when}*...`, channelName);
+        return;
+      }
+
+      const options = (what === 'remote') ? { off: false, remote: true } : { off: true, remote: false };
+      this.sayEvents(startDate, options);
     });
 
     // load events at initialization
     await this.loadIcs();
-
-    // setTimeout(() => {
-    //   this.sayEvents();
-    // }, 2000);
   }
 
-  sayEvents(date = new Date()) {
+  sayEvents(date, options = { off: true, remote: true }) {
     const channelName = this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
-
-    this.bot.say('*Today, don\'t search for those people at the office:*', channelName);
-
-    this.events.forEach(({ startDate, endDate, summary }) => {
+    const botSayFunc = ({ startDate, endDate, summary }) => {
       if (dateFns.isWithinRange(date, startDate, endDate)) {
-        let string = summary.replace(/Télétravail -/, ':house_with_garden:');
-        string = string.replace(/Congé payé -/, ':palm_tree:');
-
-        this.bot.say(string, channelName);
-
+        this.bot.say(this.getEventString(summary), channelName);
       }
-    });
+    }
+
+    if (dateFns.isWeekend(date)) {
+      this.bot.say(':tada: Everyone is *OFF*, it\'s the week-end! :tada:', channelName);
+      return;
+    }
+
+    let stringDate = date.toLocaleDateString('en-EN', { weekday: 'long', month: 'long', day: 'numeric' });
+
+    if (dateFns.isSameDay(date, new Date())) {
+      stringDate = 'Today';
+    } else if (dateFns.isTomorrow(date, new Date())) {
+      stringDate = 'Tomorrow';
+    }
+
+    this.bot.say(`*${stringDate}*, don't search for those people at the office:`, channelName);
+
+    if (options.remote) {
+      this.events
+        .filter((event) => event.summary.match(stringMatcher.remote))
+        .forEach(botSayFunc);
+    }
+
+    if (options.off) {
+      this.events
+        .filter((event) => event.summary.match(stringMatcher.off))
+        .forEach(botSayFunc);
+    }
+  }
+
+  getEventString(str) {
+    let string = str.replace(stringMatcher.remote, ':house_with_garden:');
+    string = string.replace(stringMatcher.off, ':palm_tree:');
+
+    return string;
   }
 
   async loadIcs() {
