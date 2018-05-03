@@ -37,7 +37,7 @@ class Bot {
         try {
           callback(new Message(messageInfo, this));
         } catch (e) {
-          logError(e.message);
+          this.logError(e.message);
         }
       });
     });
@@ -68,51 +68,16 @@ class Bot {
   }
 
   logError(message) {
-    // if (!this.availablePublicChannels) {
-    //   return;
-    // }
-    //
-    // const channel = this.availablePublicChannels[this.config.bot_log_channel];
-    //
-    // if (!channel) {
-    //   return;
-    // }
-
     this.say(`:exclamation: ${message}`, this.config.bot_log_channel);
   }
 
   log(message) {
-    // if (!this.availablePublicChannels) {
-    //   return;
-    // }
-    //
-    // const channel = this.availablePublicChannels[this.config.bot_log_channel];
-    //
-    // if (!channel) {
-    //   return;
-    // }
-
     this.say(`:memo: ${message}`, this.config.bot_log_channel);
   }
 
   reply(text, message) {
     this.say(text, message.channel);
   }
-
-  // say(message, channel, attachments) {
-  //   if (!message || !channel) {
-  //     return;
-  //   }
-  //
-  //   if (attachments) {
-  //     return this.web.chat.postMessage(channel.id, message, {
-  //       as_user: true,
-  //       attachments: Array.isArray(attachments) ? attachments : [attachments],
-  //     });
-  //   } else {
-  //     return this.rtm.sendMessage(message, channel.id);
-  //   }
-  // }
 
   say(message, channel, attachments) {
     if (!message || !channel) {
