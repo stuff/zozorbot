@@ -25,16 +25,15 @@ class Events extends Botmodule {
       this.sayEvents(new Date());
     });
 
-    this.hears('who.*(off|remote) ([^\?]+)', (bot, { match }) => {
+    this.hears('who.*(off|remote) ([^\?]+)', (bot, { match, channel }) => {
       const [, what, when] = match;
       const { startDate } = Sherlock.parse(when);
       if (!startDate) {
-        const channelName = this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
-        this.bot.say(`Well... It's embarrassing, I don't understand *${when}*...`, channelName);
+        this.bot.say(`Well... It's embarrassing, I don't understand *${when}*...`, channel);
         return;
       }
 
-      const options = (what === 'remote') ? { off: false, remote: true } : { off: true, remote: false };
+      const options = (what === 'remote') ? { off: false, remote: true, channel } : { off: true, remote: false, channel };
       this.sayEvents(startDate, options);
     });
 
@@ -43,15 +42,15 @@ class Events extends Botmodule {
   }
 
   sayEvents(date, options = { off: true, remote: true }) {
-    const channelName = this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
+    const channel = options.channel || this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
     const botSayFunc = ({ startDate, endDate, summary }) => {
       if (dateFns.isWithinRange(date, startDate, endDate)) {
-        this.bot.say(this.getEventString(summary), channelName);
+        this.bot.say(this.getEventString(summary), channel);
       }
     }
 
     if (dateFns.isWeekend(date)) {
-      this.bot.say(':tada: Everyone is *OFF*, it\'s the week-end! :tada:', channelName);
+      this.bot.say(':tada: Everyone is *OFF*, it\'s the week-end! :tada:', channel);
       return;
     }
 
@@ -63,7 +62,7 @@ class Events extends Botmodule {
       stringDate = 'Tomorrow';
     }
 
-    this.bot.say(`*${stringDate}*, don't search for those people at the office:`, channelName);
+    this.bot.say(`*${stringDate}*, don't search for those people at the office:`, channel);
 
     if (options.remote) {
       this.events
