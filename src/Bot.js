@@ -2,7 +2,7 @@ const fs = require('fs');
 const path_module = require('path');
 const SlackClient = require('@slack/client');
 
-const Channel = require('./Channel');
+// const Channel = require('./Channel');
 const Message = require('./Message');
 
 const { WebClient, RtmClient, CLIENT_EVENTS, RTM_EVENTS } = SlackClient;
@@ -17,7 +17,6 @@ class Bot {
     this.web = new WebClient(this.config.bot_token);
 
     this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
-
       this.availablePublicChannels = rtmStartData.channels.reduce((acc, channel) => {
         if (channel.is_member) {
           acc[channel.name] = channel;
@@ -69,40 +68,76 @@ class Bot {
   }
 
   logError(message) {
-    const channel = this.availablePublicChannels[this.config.bot_log_channel];
+    // if (!this.availablePublicChannels) {
+    //   return;
+    // }
+    //
+    // const channel = this.availablePublicChannels[this.config.bot_log_channel];
+    //
+    // if (!channel) {
+    //   return;
+    // }
 
-    if (!channel) {
-      return;
-    }
-
-    this.say(`:exclamation: ${message}`, channel);
+    this.say(`:exclamation: ${message}`, this.config.bot_log_channel);
   }
 
   log(message) {
-    const channel = this.availablePublicChannels[this.config.bot_log_channel];
+    // if (!this.availablePublicChannels) {
+    //   return;
+    // }
+    //
+    // const channel = this.availablePublicChannels[this.config.bot_log_channel];
+    //
+    // if (!channel) {
+    //   return;
+    // }
 
-    if (!channel) {
-      return;
-    }
-
-    this.say(`:memo: ${message}`, channel);
+    this.say(`:memo: ${message}`, this.config.bot_log_channel);
   }
 
   reply(text, message) {
     this.say(text, message.channel);
   }
 
+  // say(message, channel, attachments) {
+  //   if (!message || !channel) {
+  //     return;
+  //   }
+  //
+  //   if (attachments) {
+  //     return this.web.chat.postMessage(channel.id, message, {
+  //       as_user: true,
+  //       attachments: Array.isArray(attachments) ? attachments : [attachments],
+  //     });
+  //   } else {
+  //     return this.rtm.sendMessage(message, channel.id);
+  //   }
+  // }
+
   say(message, channel, attachments) {
     if (!message || !channel) {
       return;
     }
+
+    let channelId;
+
+    if (typeof channel === 'string' && this.availablePublicChannels) {
+      channelId = this.availablePublicChannels[channel].id;
+    } else {
+      channelId = channel.id;
+    }
+
+    if (!channelId) {
+      return;
+    }
+
     if (attachments) {
-      return this.web.chat.postMessage(channel.id, message, {
+      return this.web.chat.postMessage(channelId, message, {
         as_user: true,
         attachments: Array.isArray(attachments) ? attachments : [attachments],
       });
     } else {
-      return this.rtm.sendMessage(message, channel.id);
+      return this.rtm.sendMessage(message, channelId);
     }
   }
 

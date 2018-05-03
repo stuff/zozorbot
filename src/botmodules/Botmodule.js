@@ -1,4 +1,5 @@
 const SlackClient = require('@slack/client');
+const cron = require('node-cron');
 
 const Message = require('../Message');
 
@@ -19,6 +20,13 @@ class Botmodule {
 
   on(messageType, callback) {
     this.hears('.*', [messageType], callback);
+  }
+
+  schedule(cronExpression, taskFunction) {
+    cron.schedule(cronExpression, taskFunction);
+    
+    // TODO: find a way to enable login even when we're not loged in to slack
+    // this.bot.log(`:stopwatch: *${this.id}* Botmodule added cron (${cronExpression}).`);
   }
 
   hears(regexStrings, typeFilters, callback) {
