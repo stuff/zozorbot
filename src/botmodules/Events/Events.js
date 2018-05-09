@@ -4,7 +4,6 @@ const ICAL = require('ical.js');
 var dateFns = require('date-fns')
 
 const Botmodule = require('../Botmodule');
-// const Message = require('../../Message');
 
 const stringMatcher = {
   remote: /Télétravail -/,
@@ -43,9 +42,9 @@ class Events extends Botmodule {
 
   sayEvents(date, options = { off: true, remote: true }) {
     const channel = options.channel || this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
-    const botSayFunc = ({ startDate, endDate, summary }) => {
+    const botSayFunc = ({ startDate, endDate, summary, morningOnly, afternoonOnly }) => {
       if (dateFns.isWithinRange(date, startDate, endDate)) {
-        this.bot.say(this.getEventString(summary), channel);
+        this.bot.say(this.getEventString(summary, morningOnly, afternoonOnly), channel);
       }
     }
 
@@ -77,9 +76,16 @@ class Events extends Botmodule {
     }
   }
 
-  getEventString(str) {
+  getEventString(str, morningOnly, afternoonOnly) {
     let string = str.replace(stringMatcher.remote, ':house_with_garden:');
     string = string.replace(stringMatcher.off, ':palm_tree:');
+
+
+    if (morningOnly && !afternoonOnly) {
+      string += ' *(morning only)*';
+    } else if (!morningOnly && afternoonOnly) {
+      string += ' *(afternoon only)*';
+    }
 
     return string;
   }
@@ -114,6 +120,11 @@ class Events extends Botmodule {
       const summary = component.getFirstPropertyValue('summary');
       const dtstart = component.getFirstPropertyValue('dtstart');
       const dtend = component.getFirstPropertyValue('dtend');
+      const description = component.getFirstPropertyValue('description');
+
+
+      const morningOnly = !!(description && description.match(/matinée/));
+      const afternoonOnly = !!(description && description.match(/après-midi/));
 
       const startDate = dateFns.startOfDay(new Date(dtstart));
       const endDate = dateFns.endOfDay(dateFns.subDays(new Date(dtend), 1));
@@ -121,7 +132,9 @@ class Events extends Botmodule {
       return {
         summary,
         startDate,
-        endDate
+        endDate,
+        morningOnly,
+        afternoonOnly,
       }
     });
   }
