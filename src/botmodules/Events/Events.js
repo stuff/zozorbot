@@ -1,18 +1,22 @@
 const request = require('superagent');
 const Sherlock = require('sherlockjs');
 const ICAL = require('ical.js');
-var dateFns = require('date-fns')
+const uniq = require('lodash/uniq')
+const dateFns = require('date-fns')
 
 const Botmodule = require('../Botmodule');
 
 const stringMatcher = {
-  remote: /Télétravail -/,
-  off: /Congé payé -/,
+  remote: /^(Télétravail -) (.*)/,
+  off: /^(Congé payé -) (.*)/,
+  there: /^(Présence -) (.*)/,
+  birthday: /^(Anniversaire de) (.*)/,
 }
 
 class Events extends Botmodule {
   async init() {
     this.events = {};
+    this.remoteWorkers = [];
 
     // reload the file at midnight every day
     this.schedule('0 0 * * *', async () => {
@@ -64,21 +68,56 @@ class Events extends Botmodule {
     this.bot.say(`*${stringDate}*, don't search for those people at the office:`, channel);
 
     if (options.remote) {
-      this.events
-        .filter((event) => event.summary.match(stringMatcher.remote))
-        .forEach(botSayFunc);
+      const remoteEvents = this.events
+        .filter(event => event.summary.match(stringMatcher.remote));
+
+      // add remote event for regular remote worker
+      this.remoteWorkers.forEach((workerName) => {
+        if (!this.isOff(workerName, date) && !this.isThere(workerName, date)) {
+          const startDate = dateFns.startOfDay(date);
+          const endDate = dateFns.endOfDay(date);
+
+          remoteEvents.push({
+            type: 'remote',
+            who: workerName,
+            summary: `Télétravail - ${workerName}`,
+            startDate,
+            endDate,
+            morningOnly: false,
+            afternoonOnly: false,
+          });
+        }
+      });
+
+      remoteEvents.forEach(botSayFunc);
     }
 
     if (options.off) {
       this.events
-        .filter((event) => event.summary.match(stringMatcher.off))
+        .filter(event => event.summary.match(stringMatcher.off))
         .forEach(botSayFunc);
     }
   }
 
+  isOff(who, date) {
+    const offEvents = this.events
+        .filter(event => event.summary.match(stringMatcher.off))
+        .filter(event => event.who === who);
+
+    return offEvents.some(({ startDate, endDate }) => dateFns.isWithinRange(date, startDate, endDate));
+  }
+
+  isThere(who, date) {
+    const offEvents = this.events
+      .filter(event => event.summary.match(stringMatcher.there))
+      .filter(event => event.who === who);
+
+    return offEvents.some(({ startDate, endDate }) => dateFns.isWithinRange(date, startDate, endDate));
+  }
+
   getEventString(str, morningOnly, afternoonOnly) {
-    let string = str.replace(stringMatcher.remote, ':house_with_garden:');
-    string = string.replace(stringMatcher.off, ':palm_tree:');
+    let string = str.replace(stringMatcher.remote, ':house_with_garden: $2');
+    string = string.replace(stringMatcher.off, ':palm_tree: $2');
 
 
     if (morningOnly && !afternoonOnly) {
@@ -109,7 +148,16 @@ class Events extends Botmodule {
       const parsed = this.parseIcal(iCalendarData);
 
       this.events = this.events.concat(parsed);
-    })
+
+      this.remoteWorkers = uniq(this.remoteWorkers.concat(
+        parsed.reduce((workers, { type, who }) => {
+          if (type === 'there' && !workers.includes(who)) {
+            workers.push(who);
+          }
+          return workers;
+        }, [])
+      ));
+    });
   }
 
   parseIcal(iCalendarData) {
@@ -122,14 +170,34 @@ class Events extends Botmodule {
       const dtend = component.getFirstPropertyValue('dtend');
       const description = component.getFirstPropertyValue('description');
 
-
       const morningOnly = !!(description && description.match(/matinée/));
       const afternoonOnly = !!(description && description.match(/après-midi/));
+
+      let type;
+      let who;
+
+      if (summary.match(stringMatcher.there)) {
+        type = 'there';
+        who = summary.match(stringMatcher.there)[2];
+      } else {
+        if (summary.match(stringMatcher.off)) {
+          type = 'vacation';
+          who = summary.match(stringMatcher.off)[2];
+        } else if (summary.match(stringMatcher.remote)) {
+          type = 'remote';
+          who = summary.match(stringMatcher.remote)[2];
+        } else if (summary.match(stringMatcher.birthday)) {
+          type = 'birthday';
+          who = summary.match(stringMatcher.birthday)[2];
+        }
+      }
 
       const startDate = dateFns.startOfDay(new Date(dtstart));
       const endDate = dateFns.endOfDay(dateFns.subDays(new Date(dtend), 1));
 
       return {
+        type,
+        who,
         summary,
         startDate,
         endDate,
