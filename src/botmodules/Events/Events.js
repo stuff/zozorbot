@@ -1,7 +1,9 @@
 const request = require('superagent');
 const Sherlock = require('sherlockjs');
 const ICAL = require('ical.js');
-const uniq = require('lodash/uniq')
+const uniq = require('lodash/fp/uniq')
+const uniqBy = require('lodash/uniqBy')
+const sortBy = require('lodash/sortBy')
 const dateFns = require('date-fns')
 
 const Botmodule = require('../Botmodule');
@@ -46,11 +48,23 @@ class Events extends Botmodule {
 
   sayEvents(date, options = { off: true, remote: true }) {
     const channel = options.channel || this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
-    const botSayFunc = ({ startDate, endDate, summary, morningOnly, afternoonOnly }) => {
-      if (dateFns.isWithinRange(date, startDate, endDate)) {
-        this.bot.say(this.getEventString(summary, morningOnly, afternoonOnly), channel);
-      }
+
+    const filterPeriod = ({ startDate, endDate }) => dateFns.isWithinRange(date, startDate, endDate);
+
+    const botSayFunc = ({ summary, morningOnly, afternoonOnly }) => {
+      this.bot.say(this.getEventString(summary, morningOnly, afternoonOnly), channel);
     }
+
+    const filterEvents = (events, matcher) => {
+      const filteredEvents =  events
+        .filter(event => event.summary.match(matcher))
+        .filter(filterPeriod);
+
+      const uniq = uniqBy(filteredEvents, 'who');
+      const sorted = sortBy(uniq, 'who');
+
+      return sorted;
+    };
 
     if (dateFns.isWeekend(date)) {
       this.bot.say(':tada: Everyone is *OFF*, it\'s the week-end! :tada:', channel);
@@ -68,8 +82,7 @@ class Events extends Botmodule {
     this.bot.say(`*${stringDate}*, don't search for those people at the office:`, channel);
 
     if (options.remote) {
-      const remoteEvents = this.events
-        .filter(event => event.summary.match(stringMatcher.remote));
+      const remoteEvents = filterEvents(this.events, stringMatcher.remote);
 
       // add remote event for regular remote worker
       this.remoteWorkers.forEach((workerName) => {
@@ -93,9 +106,7 @@ class Events extends Botmodule {
     }
 
     if (options.off) {
-      this.events
-        .filter(event => event.summary.match(stringMatcher.off))
-        .forEach(botSayFunc);
+      filterEvents(this.events, stringMatcher.off).forEach(botSayFunc);
     }
   }
 
