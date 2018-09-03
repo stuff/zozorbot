@@ -24,7 +24,7 @@ class Botmodule {
 
   schedule(cronExpression, taskFunction) {
     cron.schedule(cronExpression, taskFunction);
-    
+
     // TODO: find a way to enable login even when we're not loged in to slack
     // this.bot.log(`:stopwatch: *${this.id}* Botmodule added cron (${cronExpression}).`);
   }
@@ -45,15 +45,16 @@ class Botmodule {
 
     this.bot.addMessageListener(async (message) => {
       const messageInfo = await message.getInfo();
+
       const { text } = messageInfo;
 
       if ((this.channels !== '*' && !this.channels.includes(messageInfo.channel.name))) {
         return;
       }
 
-      if (!text) {
-        return;
-      }
+      // if (!text) {
+      //   return;
+      // }
 
       if (this.config.jail_channel && messageInfo.channel.name !== this.config.jail_channel) {
         return;

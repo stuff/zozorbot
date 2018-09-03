@@ -5,8 +5,8 @@ const Message = require('../../Message');
 
 class Wwc extends Botmodule {
   init() {
-    this.on(Message.FILE_SHARE, async (bot, message) => {
-      const { file } = message;
+    this.on(Message.AMBIENT, async (bot, message) => {
+      const file = message.files[0];
 
       if (file.filetype !== 'space') {
         return;
@@ -15,7 +15,7 @@ class Wwc extends Botmodule {
       const endpoint = this.moduleConfig.add_slackpost_endpoint;
       const body = {
         userEmail: message.user.profile.email,
-        postUrl: message.file.permalink,
+        postUrl: file.permalink,
         createdAt: Date.now(),
       };
 
