@@ -62,6 +62,7 @@ class Events extends Botmodule {
     const filterEvents = (events, matcher) => {
       const filteredEvents =  events
         .filter(event => event.summary.match(matcher))
+        .filter(event => event.targetChannel === channel)
         .filter(filterPeriod);
 
       const uniq = uniqBy(filteredEvents, 'who');
