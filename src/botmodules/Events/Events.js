@@ -1,10 +1,11 @@
 const request = require('superagent');
 const Sherlock = require('sherlockjs');
 const ICAL = require('ical.js');
-const uniq = require('lodash/fp/uniq')
-const uniqBy = require('lodash/uniqBy')
-const sortBy = require('lodash/sortBy')
-const dateFns = require('date-fns')
+const uniq = require('lodash/fp/uniq');
+const uniqBy = require('lodash/uniqBy');
+const sortBy = require('lodash/sortBy');
+const dateFns = require('date-fns');
+const { eachOf } = require('async');
 
 const Botmodule = require('../Botmodule');
 
@@ -17,17 +18,19 @@ const stringMatcher = {
 
 class Events extends Botmodule {
   async init() {
-    this.events = {};
-    this.remoteWorkers = [];
+    this.events = [];
+    this.remoteWorkers = {};
 
     // reload the file at midnight every day
-    this.schedule('0 0 * * *', async () => {
-      await this.loadIcs();
+    this.schedule('0 0 * * *', () => {
+      this.loadIcs();
     });
 
-    // say all events in the channel
+    // say all events in various channels
     this.schedule('0 9 * * *', () => {
-      this.sayEvents(new Date());
+      this.moduleConfig.ics.forEach(({ target_channel }) => {
+        this.sayEvents(target_channel, new Date());
+      })
     });
 
     this.hears('who.*(off|remote) ([^\?]+)', (bot, { match, channel }) => {
@@ -38,17 +41,18 @@ class Events extends Botmodule {
         return;
       }
 
-      const options = (what === 'remote') ? { off: false, remote: true, channel } : { off: true, remote: false, channel };
-      this.sayEvents(startDate, options);
+      const options = (what === 'remote')
+                      ? { off: false, remote: true, channel }
+                      : { off: true, remote: false, channel };
+
+      this.sayEvents(channel.name, startDate, options);
     });
 
     // load events at initialization
     await this.loadIcs();
   }
 
-  sayEvents(date, options = { off: true, remote: true }) {
-    const channel = options.channel || this.moduleConfig.channel; // TODO: should use summary_channel from per ics configuration
-
+  sayEvents(channel, date, options = { off: true, remote: true }) {
     const filterPeriod = ({ startDate, endDate }) => dateFns.isWithinRange(date, startDate, endDate);
 
     const botSayFunc = ({ summary, morningOnly, afternoonOnly }) => {
@@ -84,8 +88,9 @@ class Events extends Botmodule {
     if (options.remote) {
       const remoteEvents = filterEvents(this.events, stringMatcher.remote);
 
-      // add remote event for regular remote worker
-      this.remoteWorkers.forEach((workerName) => {
+    // dynamically add remote event for regular remote worker
+    if (this.remoteWorkers[channel]) {
+      this.remoteWorkers[channel].forEach((workerName) => {
         if (!this.isOff(workerName, date) && !this.isThere(workerName, date)) {
           const startDate = dateFns.startOfDay(date);
           const endDate = dateFns.endOfDay(date);
@@ -101,6 +106,7 @@ class Events extends Botmodule {
           });
         }
       });
+    }
 
       remoteEvents.forEach(botSayFunc);
     }
@@ -141,37 +147,55 @@ class Events extends Botmodule {
   }
 
   async loadIcs() {
+    this.events = [];
+    this.remoteWorkers = {};
+
     const files = this.moduleConfig.ics;
-    const promises = files.map(({ name, url }) => {
-      return request.get(url)
-    });
 
     this.bot.log(':arrow_down: Loading all ical events file');
 
-    const contents = await Promise.all(promises);
+    const attendancePromises = [];
+    const offPromises = files.map(({ target_channel, name, url, remote_workers_attendance }) => {
+      if (remote_workers_attendance) {
+        attendancePromises.push(remote_workers_attendance.map(url => request.get(url)));
+      }
+      return request.get(url);
+    });
 
-    this.bot.log(':white_check_mark: ical events loaded');
+    const offContents = await Promise.all(offPromises);
 
-    this.events = [];
-
-    return this.moduleConfig.ics.forEach((ics, n) => {
-      const iCalendarData = contents[n].text;
-      const parsed = this.parseIcal(iCalendarData);
-
+    offContents.forEach(({ text: iCalendarData}, n) => {
+      const parsed = this.parseIcal(iCalendarData, files[n].target_channel);
       this.events = this.events.concat(parsed);
+    });
 
-      this.remoteWorkers = uniq(this.remoteWorkers.concat(
-        parsed.reduce((workers, { type, who }) => {
-          if (type === 'there' && !workers.includes(who)) {
+    eachOf(attendancePromises, async (attendancePromise, n) => {
+      const attendanceContents = await Promise.all(attendancePromise);
+
+      attendanceContents.forEach(({ text: iCalendarData}) => {
+        const channelName = files[n].target_channel;
+        const parsed = this.parseIcal(iCalendarData, channelName);
+        this.events = this.events.concat(parsed);
+
+        const remoteWorkers = parsed.reduce((workers, { type, who }) => {
+          if (!workers.includes(who)) {
             workers.push(who);
           }
           return workers;
-        }, [])
-      ));
+        }, []);
+
+        if (!this.remoteWorkers[channelName]) {
+          this.remoteWorkers[channelName] = [];
+        }
+
+        this.remoteWorkers[channelName] = this.remoteWorkers[channelName].concat(remoteWorkers);
+      });
+    }, () => {
+      this.bot.log(':white_check_mark: ical events loaded');
     });
   }
 
-  parseIcal(iCalendarData) {
+  parseIcal(iCalendarData, targetChannel) {
     const jcalData = ICAL.parse(iCalendarData);
     const vcalendar = new ICAL.Component(jcalData);
 
@@ -207,6 +231,7 @@ class Events extends Botmodule {
       const endDate = dateFns.endOfDay(dateFns.subDays(new Date(dtend), 1));
 
       return {
+        targetChannel,
         type,
         who,
         summary,
