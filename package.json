@@ -12,7 +12,7 @@
     "@slack/client": "^3.14.1",
     "async": "^2.6.1",
     "calendario": "^1.1.4",
-    "country-list": "^1.1.0",
+    "country-list": "^2.1.0",
     "date-fns": "^1.29.0",
     "ical.js": "^1.2.2",
     "ical2json": "^1.2.0",
