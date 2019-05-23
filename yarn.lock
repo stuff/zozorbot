@@ -3012,8 +3012,8 @@ whatwg-url@^4.3.0:
     webidl-conversions "^3.0.0"
 
 whereis@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/whereis/-/whereis-0.4.0.tgz#7ace618a4b8c2a8863db36ff9f54ef8aa23d822b"
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/whereis/-/whereis-0.4.1.tgz#03afb28ce396aef4a17abfde3cec04af0e609520"
 
 which-module@^2.0.0:
   version "2.0.0"
