@@ -22,7 +22,7 @@
     "superagent": "^3.8.1"
   },
   "devDependencies": {
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^8.0.1",
     "jest": "^21.2.1",
     "shipit-cli": "^3.0.0"
   }
