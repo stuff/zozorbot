@@ -19,7 +19,7 @@
     "node-cron": "^1.2.1",
     "sherlockjs": "^1.4.0",
     "shipit-deploy": "^2.5.1",
-    "superagent": "^3.8.1"
+    "superagent": "^5.0.5"
   },
   "devDependencies": {
     "fs-extra": "^8.0.1",
