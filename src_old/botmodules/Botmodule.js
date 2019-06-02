@@ -14,7 +14,7 @@ class Botmodule {
     this.channels = this.moduleConfig.channel ? this.moduleConfig.channel.split(',') : '*';
 
     this.bot.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
-      this.bot.log(`:robot_face: *${this.id}* Botmodule loaded.`);
+      this.bot.log(`:robot_face: *${this.id}* Feature loaded.`);
     });
   }
 
