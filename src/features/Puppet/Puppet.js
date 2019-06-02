@@ -14,7 +14,7 @@ class Puppet extends Feature {
   async start() {
     await super.start();
 
-    this.controller.hears('say `(.*)` in <#\\w+\\|(\\w+)', 'direct_message', async (bot, message) => {
+    this.controller.hears('say `(.*)` in <#\\w+\\|(.*)>', 'direct_message', async (bot, message) => {
       const { raw_message, match } = message;
       const [, what, where] = match;
 
