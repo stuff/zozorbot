@@ -43,10 +43,10 @@ class Events extends Feature {
     // load events at initialization
     await this.loadIcs();
 
-    // TODO: remove
-    this.config.ics.forEach(async ({ target_channel }) => {
-      await this.sayEvents(target_channel, new Date());
-    });
+    // // TODO: remove
+    // this.config.ics.forEach(async ({ target_channel }) => {
+    //   await this.sayEvents(target_channel, new Date());
+    // });
 
     this.controller.hears('who (will be|is) (out of office|remote|on vacation)([^\?]+)', 'direct_mention', async (bot, message) => {
       const { channel, raw_message, match } = message;
