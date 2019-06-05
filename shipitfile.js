@@ -14,6 +14,7 @@ module.exports = function (shipit) {
       keepReleases: 2,
       key: '~/.ssh/id_rsa',
       shallowClone: true,
+      branch: 'master',
     },
     production: {
       servers: `${config.deploy.username}@${config.deploy.hostname}`,
@@ -25,7 +26,7 @@ module.exports = function (shipit) {
   });
 
   shipit.blTask('install_config', function () {
-    shipit.remoteCopy('config.json', currentPath);
+    shipit.copyToRemote('config.json', currentPath);
   });
 
   /* ---- */
