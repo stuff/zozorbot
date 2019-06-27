@@ -2020,10 +2020,10 @@ country-list@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/country-list/-/country-list-2.1.1.tgz#4cbccad6e10aa44d82f3e85caad18fcf5a439e64"
 
-cronstrue@^1.72.0:
-  version "1.72.0"
-  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-1.72.0.tgz#fd8899b244cc08126cc7d0bee4f768973c96c513"
-  integrity sha512-yDg05UTqB78ZVS3EALqp2Q387t5V6A40CRB7X+UqyOKEP+rApRsRrt+32xJf23/8LSEf4g3xLUPo4YXSzUzVxg==
+cronstrue@^1.78.0:
+  version "1.78.0"
+  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-1.78.0.tgz#1da16b0e6658a8658adfd38bbaf5a5f5238d4111"
+  integrity sha512-DbbIOHsng7L54RmQ4MYeJ5nN81RKo6is8jXSmZmBEXf4ufAOBHIMUqWjZqY4BGnBZN6yvCNLWwxKx3nkgVKhFw==
 
 cross-spawn@^4.0.0:
   version "4.0.2"
