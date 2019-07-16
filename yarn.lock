@@ -2603,13 +2603,13 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-findup-sync@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/findup-sync/-/findup-sync-2.0.0.tgz#9326b1488c22d1a6088650a86901b2d9a90a2cbc"
-  integrity sha1-kyaxSIwi0aYIhlCoaQGy2akKLLw=
+findup-sync@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/findup-sync/-/findup-sync-3.0.0.tgz#17b108f9ee512dfb7a5c7f3c8b27ea9e1a9c08d1"
+  integrity sha512-YbffarhcicEhOrm4CtrwdKBdCuz576RLdhJDsIfvNtxUuhdRet1qZcsMjqbePtAseKdAnDyM/IyXbu7PRPRLYg==
   dependencies:
     detect-file "^1.0.0"
-    is-glob "^3.1.0"
+    is-glob "^4.0.0"
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
@@ -3305,7 +3305,7 @@ is-extendable@^1.0.1:
   dependencies:
     is-plain-object "^2.0.4"
 
-is-extglob@^2.1.0:
+is-extglob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
   integrity sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=
@@ -3330,12 +3330,12 @@ is-generator-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-generator-fn/-/is-generator-fn-2.1.0.tgz#7d140adc389aaf3011a8f2a2a4cfa6faadffb118"
   integrity sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==
 
-is-glob@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-3.1.0.tgz#7ba5ae24217804ac70707b96922567486cc3e84a"
-  integrity sha1-e6WuJCF4BKxwcHuWkiVnSGzD6Eo=
+is-glob@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
+  integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   dependencies:
-    is-extglob "^2.1.0"
+    is-extglob "^2.1.1"
 
 is-my-ip-valid@^1.0.0:
   version "1.0.0"
@@ -4051,13 +4051,13 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-liftoff@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/liftoff/-/liftoff-2.5.0.tgz#2009291bb31cea861bbf10a7c15a28caf75c31ec"
-  integrity sha1-IAkpG7Mc6oYbvxCnwVooyvdcMew=
+liftoff@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/liftoff/-/liftoff-3.1.0.tgz#c9ba6081f908670607ee79062d700df062c52ed3"
+  integrity sha512-DlIPlJUkCV0Ips2zf2pJP0unEoT1kwYhiiPUGF3s/jtxTCjziNLoiVVh+jqWOWeFi6mmwQ5fNxvAUyPad4Dfog==
   dependencies:
     extend "^3.0.0"
-    findup-sync "^2.0.0"
+    findup-sync "^3.0.0"
     fined "^1.0.1"
     flagged-respawn "^1.0.0"
     is-plain-object "^2.0.4"
@@ -4985,7 +4985,7 @@ os-locale@^3.0.0:
     lcid "^2.0.0"
     mem "^4.0.0"
 
-os-tmpdir@^1.0.0, os-tmpdir@~1.0.2:
+os-tmpdir@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
@@ -5848,18 +5848,18 @@ sherlockjs@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/sherlockjs/-/sherlockjs-1.4.0.tgz#57dcba75dd95b9e8243b67a6ee3e13629ac4b566"
 
-shipit-cli@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/shipit-cli/-/shipit-cli-4.2.0.tgz#3689fd6f82000e0d850fa0e78ecb1a5979863c71"
-  integrity sha512-fOAzd+OeJ2jONDdmUCWlJH2Yy/31ZzBuLE5X78I/XXjSZZ3U2hFh4pA5MJ6bf+z4X1eK7k6jJVtVCyIeP9EudA==
+shipit-cli@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/shipit-cli/-/shipit-cli-5.0.0.tgz#dac216cb77e638c538614e5afcd63061bb72a893"
+  integrity sha512-vb7wugOJ7pz694xF+jA0Rj/VPhPHOOeADO7oLvkAMOV1Q3HHOBBp6bj3ZU29G6GYCQ17VUq64Gjz5ReVy/JlKA==
   dependencies:
     chalk "^2.4.1"
     commander "^2.15.0"
     interpret "^1.1.0"
-    liftoff "^2.5.0"
+    liftoff "^3.1.0"
     orchestrator "^0.3.7"
     pretty-hrtime "^1.0.0"
-    ssh-pool "^4.1.2"
+    ssh-pool "^5.0.0"
     stream-line-wrapper "^0.1.1"
     v8flags "^3.1.0"
 
@@ -5998,13 +5998,13 @@ sprintf-js@^1.0.3:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
   integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
-ssh-pool@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/ssh-pool/-/ssh-pool-4.1.2.tgz#88dc7afcbe3acef061b5fd7972927ff55b04fbf6"
-  integrity sha512-XakgkZtCpOA6o1yqpj7u8P4LZtXRPI6YqM6/VHBjxC1u3RVlwvc57o4xJgV4tHdMFKjz8jkcx04nekH7FblOMw==
+ssh-pool@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ssh-pool/-/ssh-pool-5.0.0.tgz#e898e5cfde85a774f3d4e4e5dd38222a193a0069"
+  integrity sha512-L1SeRHUxDzZMHTkS7+Vl0cRUrXADMpvigCyXVRSyeY5izVOx0L750hMVkMN5nrfpezYOSaz+Yjae9NKyiSm3lA==
   dependencies:
     stream-line-wrapper "^0.1.1"
-    tmp "^0.0.33"
+    tmp "^0.1.0"
     which "^1.3.1"
 
 sshpk@^1.7.0:
@@ -6243,12 +6243,12 @@ through@~2.3.4:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
-tmp@^0.0.33:
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
-  integrity sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
+tmp@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.1.0.tgz#ee434a4e22543082e294ba6201dcc6eafefa2877"
+  integrity sha512-J7Z2K08jbGcdA1kkQpJSqLF6T0tdQqpR2pnSUXsIchbPdTI9v3e85cLW0d6WDhwuAleOV71j2xWs8qMPfK7nKw==
   dependencies:
-    os-tmpdir "~1.0.2"
+    rimraf "^2.6.3"
 
 tmpl@1.0.x:
   version "1.0.4"
