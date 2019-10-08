@@ -524,12 +524,6 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/filenamify@^2.0.1":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/filenamify/-/filenamify-2.0.2.tgz#6e1a03f3c636e6c728ffe70774ead4f0b3f88bdd"
-  dependencies:
-    filenamify "*"
-
 "@types/form-data@*", "@types/form-data@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@types/form-data/-/form-data-2.2.1.tgz#ee2b3b8eaa11c0938289953606b745b738c54b1e"
@@ -1541,32 +1535,35 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-botbuilder-adapter-slack@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/botbuilder-adapter-slack/-/botbuilder-adapter-slack-1.0.3.tgz#83a36b7a8dbfda854ed0db170a4efa84a56ad31f"
+botbuilder-adapter-slack@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/botbuilder-adapter-slack/-/botbuilder-adapter-slack-1.0.4.tgz#5f48b7c27613cbf81e07b05df55ed261cc99ba27"
+  integrity sha512-ULSBE02TyHJoBq/gOg+vruB8Klept8ZG36EoyH0lM3l/0vSM/ssaMgwQ/3C2yX8Txxwk4IHadfA78Fn2MLYGuA==
   dependencies:
     "@slack/client" "^4.7.0"
-    botbuilder "^4.4.0"
-    botkit "^4.0.2"
+    botbuilder "^4.5.2"
+    botkit "^4.5.0"
     debug "^4.1.0"
 
-botbuilder-core@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.4.0.tgz#e2c984431be7729ff0c59583fc7d45a5864830d1"
+botbuilder-core@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.5.3.tgz#a7eaaa94bc51efb1cd9cb9dfd706ff12f6a2eba3"
+  integrity sha512-uH8ouKGAEtssHDZZO3CKyMncnzSTcIxI8WhjHqr4DRkV0N08DjAzrpYLHvleyBNK2JFN/2zHKDZJKsScl73jEA==
   dependencies:
     assert "^1.4.1"
-    botframework-schema "^4.4.0"
+    botframework-schema "^4.5.3"
 
-botbuilder-dialogs@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-dialogs/-/botbuilder-dialogs-4.4.0.tgz#33ea8f955f8fc32c01b24bae36341a86e846fd6a"
+botbuilder-dialogs@^4.5.2:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder-dialogs/-/botbuilder-dialogs-4.5.3.tgz#cf2723bc527b06065fc9fbf2a8ca3426fad7cd37"
+  integrity sha512-uwbCInkZCQiH6+SIh9O1KTyAYXWguC9If45n1GzWZOBflvQHjU0sXMWysIqPFZfR/rsYxAYJOo5o+Hiy0hqEsQ==
   dependencies:
     "@microsoft/recognizers-text-choice" "1.1.2"
     "@microsoft/recognizers-text-date-time" "1.1.2"
     "@microsoft/recognizers-text-number" "1.1.2"
     "@microsoft/recognizers-text-suite" "1.1.2"
     "@types/node" "^10.12.18"
-    botbuilder-core "^4.4.0"
+    botbuilder-core "^4.5.3"
 
 botbuilder@^3.16.0:
   version "3.16.0"
@@ -1591,35 +1588,37 @@ botbuilder@^3.16.0:
     sprintf-js "^1.0.3"
     url-join "^1.1.0"
 
-botbuilder@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.4.0.tgz#877c62ab10f23a9d4924041f8ebf3a77263f4d32"
+botbuilder@^4.5.2:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.5.3.tgz#67cc1892cbb8591194fd4a21f91806e003758864"
+  integrity sha512-m/vOni8eM6sxb2OpkH0IkF2pxFFp2sX5HSedEWADA6yTzHnF8zaDrZ0CDe2/lh4nsizwSeP6GotrobsdyxuyxQ==
   dependencies:
-    "@types/filenamify" "^2.0.1"
     "@types/node" "^10.12.18"
-    botbuilder-core "^4.4.0"
-    botframework-connector "^4.4.0"
-    filenamify "^2.0.0"
+    botbuilder-core "^4.5.3"
+    botframework-connector "^4.5.3"
+    filenamify "^4.1.0"
     fs-extra "^7.0.1"
 
-botframework-connector@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.4.0.tgz#6b6d1b51d44ef9dae7b22c84f1eef8a9ccde9df5"
+botframework-connector@^4.5.2, botframework-connector@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.5.3.tgz#6e98423d8c0c5f7f1e9cd6fbacccedcfaa084042"
+  integrity sha512-a98+yMnTbTr2C6KwVPf30z72ieXrHDkP5BH48IZz6qi7Z828jDG6cSwZsbqlA9ot2ETK4UWXKERVik7XpYcdvQ==
   dependencies:
     "@azure/ms-rest-js" "1.2.6"
     "@types/jsonwebtoken" "7.2.8"
     "@types/node" "^10.12.18"
     base64url "^3.0.0"
-    botframework-schema "^4.4.0"
+    botframework-schema "^4.5.3"
     form-data "^2.3.3"
     jsonwebtoken "8.0.1"
     nock "^10.0.3"
     node-fetch "^2.2.1"
     rsa-pem-from-mod-exp "^0.8.4"
 
-botframework-schema@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.4.0.tgz#83bc05221e50bb9f1d609ce52a8242becbecfb30"
+botframework-schema@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.5.3.tgz#8f41766ec3c6243dd065fd1b62fcf0ef1fb8c58f"
+  integrity sha512-Tf9obp0/qdhhx1+YmAQPt+RkqWyULPcj2/XPd4kFhKNo80afsLI3ZN7kJdfw+PitSQDisxjmQ+r2rdt0q2jMtw==
 
 botkit-studio-sdk@^1.0.8:
   version "1.0.9"
@@ -1661,14 +1660,15 @@ botkit@0.7.4:
     ware "^1.3.0"
     ws "^6.1.0"
 
-botkit@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/botkit/-/botkit-4.0.2.tgz#0c8b5cb09396cddc00be31dfe3b1331be76d2bd7"
+botkit@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/botkit/-/botkit-4.5.0.tgz#678d360d7f139cbab3786737b28aae88cd323f4e"
+  integrity sha512-hlsJfUPbfGNTHK5pkgVMrkoLvP1HX9CHm0lJighQeLhR4q+W9ns4U67P2VxT2vgaV2CYRhZUTmDGhzhdZvLFTA==
   dependencies:
     body-parser "^1.18.3"
-    botbuilder "^4.4.0"
-    botbuilder-dialogs "^4.4.0"
-    botframework-connector "^4.4.0"
+    botbuilder "^4.5.2"
+    botbuilder-dialogs "^4.5.2"
+    botframework-connector "^4.5.2"
     debug "^4.1.0"
     express "^4.16.4"
     hbs "^4.0.1"
@@ -2572,20 +2572,13 @@ filename-reserved-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-reserved-regex/-/filename-reserved-regex-2.0.0.tgz#abf73dfab735d045440abfea2d91f389ebbfa229"
 
-filenamify@*:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-4.0.0.tgz#1f93b56e7340447bbb95f7f71ab9d9c4fa3d5393"
+filenamify@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-4.1.0.tgz#54d110810ae74eebfe115c1b995bd07e03cf2184"
+  integrity sha512-KQV/uJDI9VQgN7sHH1Zbk6+42cD6mnQ2HONzkXUfPJ+K2FC8GZ1dpewbbHw0Sz8Tf5k3EVdHVayM4DoAwWlmtg==
   dependencies:
     filename-reserved-regex "^2.0.0"
     strip-outer "^1.0.1"
-    trim-repeated "^1.0.0"
-
-filenamify@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-2.1.0.tgz#88faf495fb1b47abfd612300002a16228c677ee9"
-  dependencies:
-    filename-reserved-regex "^2.0.0"
-    strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
 
 fill-range@^4.0.0:
@@ -6164,7 +6157,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-strip-outer@^1.0.0, strip-outer@^1.0.1:
+strip-outer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/strip-outer/-/strip-outer-1.0.1.tgz#b2fd2abf6604b9d1e6013057195df836b8a9d631"
   dependencies:
