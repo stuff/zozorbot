@@ -419,31 +419,34 @@
     winston "^2.1.1"
     ws "^1.0.1"
 
-"@slack/client@^4.7.0":
-  version "4.12.0"
-  resolved "https://registry.yarnpkg.com/@slack/client/-/client-4.12.0.tgz#ec14c84a572cd9afed398bbcf7241c5a83e94c57"
+"@slack/logger@^1.0.0":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@slack/logger/-/logger-1.1.1.tgz#5cb0658abcd2c4ec39ecf04348ba4764b9f68e00"
+  integrity sha512-PAC5CMnNAv/FPtJ0le+YD2wUV+tZ7n3Bnjj9dBI+deIcHsExCnQkQmZE79cLvfuYXbz3PWyv5coti30MJQhEjA==
   dependencies:
-    "@types/form-data" "^2.2.1"
+    "@types/node" ">=8.9.0"
+
+"@slack/types@^1.1.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@slack/types/-/types-1.2.1.tgz#132d50d02efb452c9a58573964b22f5f18ab9b1a"
+  integrity sha512-NyGh7MibW+a0OHkwwOPlv63hC639dzQdkFy4dj0tl4sAdZR4OBaE/OhXixKhCzcT3kJsPXaQmvkUN7sqSf52iA==
+
+"@slack/web-api@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@slack/web-api/-/web-api-5.2.1.tgz#d1ae18a352b1755ad5e0873e0d94d6558d1a44ae"
+  integrity sha512-YobhBNMwEFZvfvOIBNU+GNyOqUa/S1rdiWliESYAq9ZcUXGblgEYIL3sxKwuNQckBjCgSYzexT3+nX5dSepwJg==
+  dependencies:
+    "@slack/logger" "^1.0.0"
+    "@slack/types" "^1.1.0"
     "@types/is-stream" "^1.1.0"
-    "@types/node" ">=6.0.0"
-    "@types/p-cancelable" "^1.0.0"
+    "@types/node" ">=8.9.0"
     "@types/p-queue" "^2.3.2"
-    "@types/p-retry" "^3.0.0"
-    "@types/retry" "^0.12.0"
-    "@types/ws" "^5.1.1"
     axios "^0.18.0"
     eventemitter3 "^3.1.0"
-    finity "^0.5.4"
-    form-data "^2.3.3"
+    form-data "^2.5.0"
     is-stream "^1.1.0"
-    object.entries "^1.1.0"
-    object.getownpropertydescriptors "^2.0.3"
-    object.values "^1.1.0"
-    p-cancelable "~1.0.0"
     p-queue "^2.4.2"
-    p-retry "^3.0.1"
-    retry "^0.12.0"
-    ws "^5.2.0"
+    p-retry "^4.0.0"
 
 "@types/async@^2.0.48":
   version "2.4.2"
@@ -503,10 +506,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/events@*":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
-
 "@types/express-serve-static-core@*":
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.16.6.tgz#66d4b29ece3e2fb6e5aac2232723002426e651bd"
@@ -523,12 +522,6 @@
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
-
-"@types/filenamify@^2.0.1":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/filenamify/-/filenamify-2.0.2.tgz#6e1a03f3c636e6c728ffe70774ead4f0b3f88bdd"
-  dependencies:
-    filenamify "*"
 
 "@types/form-data@*", "@types/form-data@^2.2.1":
   version "2.2.1"
@@ -573,9 +566,14 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
   integrity sha512-FwI9gX75FgVBJ7ywgnq/P7tw+/o1GUbtP0KzbtusLigAOgIgNISRK0ZPl4qertvXSIE8YbsVJueQ90cDt9YYyw==
 
-"@types/node@*", "@types/node@>=6.0.0":
+"@types/node@*":
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
+
+"@types/node@>=8.9.0":
+  version "12.11.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.11.1.tgz#1fd7b821f798b7fa29f667a1be8f3442bb8922a3"
+  integrity sha512-TJtwsqZ39pqcljJpajeoofYRfeZ7/I/OMUQ5pR4q5wOKf2ocrUvBAZUMhWsOvKx3dVc/aaV5GluBivt0sWqA5A==
 
 "@types/node@^10.12.18":
   version "10.14.7"
@@ -586,21 +584,9 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.48.tgz#06e765bda1fef91b075c58d540207e8b37dbdc1f"
   integrity sha512-velR2CyDrHC1WFheHr5Jm25mdCMs0BXJRp6u0zf8PF9yeOy4Xff5sJeusWS7xOmhAoezlSq8LJ0+9M5H7YkTdw==
 
-"@types/p-cancelable@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@types/p-cancelable/-/p-cancelable-1.0.1.tgz#4f0ce8aa3ee0007c2768b9b3e6e22af20a6eecbd"
-  dependencies:
-    p-cancelable "*"
-
 "@types/p-queue@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/p-queue/-/p-queue-2.3.2.tgz#16bc5fece69ef85efaf2bce8b13f3ebe39c5a1c8"
-
-"@types/p-retry@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/p-retry/-/p-retry-3.0.1.tgz#44403f405b7b60d108df8ab37d8db81af1ea80f2"
-  dependencies:
-    p-retry "*"
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -648,13 +634,6 @@
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/@types/url-join/-/url-join-0.8.3.tgz#135f40a01140ed33b522836e99ed20dfc1056137"
   integrity sha512-bM7dzLHuCqDNlbeOxvo/KfweN3La4d9C1VFGCgefxiZXn0JcRtyGDwWCSUEO8RrMhnx/LGhDOXP8TTokM1grSA==
-
-"@types/ws@^5.1.1":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-5.1.2.tgz#f02d3b1cd46db7686734f3ce83bdf46c49decd64"
-  dependencies:
-    "@types/events" "*"
-    "@types/node" "*"
 
 "@types/yargs-parser@*":
   version "13.0.0"
@@ -1541,32 +1520,35 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-botbuilder-adapter-slack@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/botbuilder-adapter-slack/-/botbuilder-adapter-slack-1.0.3.tgz#83a36b7a8dbfda854ed0db170a4efa84a56ad31f"
+botbuilder-adapter-slack@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/botbuilder-adapter-slack/-/botbuilder-adapter-slack-1.0.5.tgz#4b32eee77e4c760c0820ba8270cf1d03583c5e8e"
+  integrity sha512-hMrBCB0LcTxzNbZ5xrsOJRZn1nuk+4G2y6O0aM7wS+ngNwn/itmX5W0h4pb6PKZH9/RYGeMc+2V4gyBfQj1mDg==
   dependencies:
-    "@slack/client" "^4.7.0"
-    botbuilder "^4.4.0"
-    botkit "^4.0.2"
+    "@slack/web-api" "^5.2.1"
+    botbuilder "^4.5.2"
+    botkit "^4.5.0"
     debug "^4.1.0"
 
-botbuilder-core@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.4.0.tgz#e2c984431be7729ff0c59583fc7d45a5864830d1"
+botbuilder-core@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.5.3.tgz#a7eaaa94bc51efb1cd9cb9dfd706ff12f6a2eba3"
+  integrity sha512-uH8ouKGAEtssHDZZO3CKyMncnzSTcIxI8WhjHqr4DRkV0N08DjAzrpYLHvleyBNK2JFN/2zHKDZJKsScl73jEA==
   dependencies:
     assert "^1.4.1"
-    botframework-schema "^4.4.0"
+    botframework-schema "^4.5.3"
 
-botbuilder-dialogs@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-dialogs/-/botbuilder-dialogs-4.4.0.tgz#33ea8f955f8fc32c01b24bae36341a86e846fd6a"
+botbuilder-dialogs@^4.5.2:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder-dialogs/-/botbuilder-dialogs-4.5.3.tgz#cf2723bc527b06065fc9fbf2a8ca3426fad7cd37"
+  integrity sha512-uwbCInkZCQiH6+SIh9O1KTyAYXWguC9If45n1GzWZOBflvQHjU0sXMWysIqPFZfR/rsYxAYJOo5o+Hiy0hqEsQ==
   dependencies:
     "@microsoft/recognizers-text-choice" "1.1.2"
     "@microsoft/recognizers-text-date-time" "1.1.2"
     "@microsoft/recognizers-text-number" "1.1.2"
     "@microsoft/recognizers-text-suite" "1.1.2"
     "@types/node" "^10.12.18"
-    botbuilder-core "^4.4.0"
+    botbuilder-core "^4.5.3"
 
 botbuilder@^3.16.0:
   version "3.16.0"
@@ -1591,35 +1573,37 @@ botbuilder@^3.16.0:
     sprintf-js "^1.0.3"
     url-join "^1.1.0"
 
-botbuilder@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.4.0.tgz#877c62ab10f23a9d4924041f8ebf3a77263f4d32"
+botbuilder@^4.5.2:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.5.3.tgz#67cc1892cbb8591194fd4a21f91806e003758864"
+  integrity sha512-m/vOni8eM6sxb2OpkH0IkF2pxFFp2sX5HSedEWADA6yTzHnF8zaDrZ0CDe2/lh4nsizwSeP6GotrobsdyxuyxQ==
   dependencies:
-    "@types/filenamify" "^2.0.1"
     "@types/node" "^10.12.18"
-    botbuilder-core "^4.4.0"
-    botframework-connector "^4.4.0"
-    filenamify "^2.0.0"
+    botbuilder-core "^4.5.3"
+    botframework-connector "^4.5.3"
+    filenamify "^4.1.0"
     fs-extra "^7.0.1"
 
-botframework-connector@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.4.0.tgz#6b6d1b51d44ef9dae7b22c84f1eef8a9ccde9df5"
+botframework-connector@^4.5.2, botframework-connector@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.5.3.tgz#6e98423d8c0c5f7f1e9cd6fbacccedcfaa084042"
+  integrity sha512-a98+yMnTbTr2C6KwVPf30z72ieXrHDkP5BH48IZz6qi7Z828jDG6cSwZsbqlA9ot2ETK4UWXKERVik7XpYcdvQ==
   dependencies:
     "@azure/ms-rest-js" "1.2.6"
     "@types/jsonwebtoken" "7.2.8"
     "@types/node" "^10.12.18"
     base64url "^3.0.0"
-    botframework-schema "^4.4.0"
+    botframework-schema "^4.5.3"
     form-data "^2.3.3"
     jsonwebtoken "8.0.1"
     nock "^10.0.3"
     node-fetch "^2.2.1"
     rsa-pem-from-mod-exp "^0.8.4"
 
-botframework-schema@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.4.0.tgz#83bc05221e50bb9f1d609ce52a8242becbecfb30"
+botframework-schema@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.5.3.tgz#8f41766ec3c6243dd065fd1b62fcf0ef1fb8c58f"
+  integrity sha512-Tf9obp0/qdhhx1+YmAQPt+RkqWyULPcj2/XPd4kFhKNo80afsLI3ZN7kJdfw+PitSQDisxjmQ+r2rdt0q2jMtw==
 
 botkit-studio-sdk@^1.0.8:
   version "1.0.9"
@@ -1661,14 +1645,15 @@ botkit@0.7.4:
     ware "^1.3.0"
     ws "^6.1.0"
 
-botkit@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/botkit/-/botkit-4.0.2.tgz#0c8b5cb09396cddc00be31dfe3b1331be76d2bd7"
+botkit@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/botkit/-/botkit-4.5.0.tgz#678d360d7f139cbab3786737b28aae88cd323f4e"
+  integrity sha512-hlsJfUPbfGNTHK5pkgVMrkoLvP1HX9CHm0lJighQeLhR4q+W9ns4U67P2VxT2vgaV2CYRhZUTmDGhzhdZvLFTA==
   dependencies:
     body-parser "^1.18.3"
-    botbuilder "^4.4.0"
-    botbuilder-dialogs "^4.4.0"
-    botframework-connector "^4.4.0"
+    botbuilder "^4.5.2"
+    botbuilder-dialogs "^4.5.2"
+    botframework-connector "^4.5.2"
     debug "^4.1.0"
     express "^4.16.4"
     hbs "^4.0.1"
@@ -2164,7 +2149,7 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
 
-define-properties@^1.1.2, define-properties@^1.1.3:
+define-properties@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.3.tgz#cf88da6cbee26fe6db7094f61d870cbd84cee9f1"
   dependencies:
@@ -2319,7 +2304,7 @@ error-ex@^1.3.1:
   dependencies:
     is-arrayish "^0.2.1"
 
-es-abstract@^1.12.0, es-abstract@^1.5.0, es-abstract@^1.5.1:
+es-abstract@^1.5.0, es-abstract@^1.5.1:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.13.0.tgz#ac86145fdd5099d8dd49558ccba2eaf9b88e24e9"
   dependencies:
@@ -2572,20 +2557,13 @@ filename-reserved-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-reserved-regex/-/filename-reserved-regex-2.0.0.tgz#abf73dfab735d045440abfea2d91f389ebbfa229"
 
-filenamify@*:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-4.0.0.tgz#1f93b56e7340447bbb95f7f71ab9d9c4fa3d5393"
+filenamify@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-4.1.0.tgz#54d110810ae74eebfe115c1b995bd07e03cf2184"
+  integrity sha512-KQV/uJDI9VQgN7sHH1Zbk6+42cD6mnQ2HONzkXUfPJ+K2FC8GZ1dpewbbHw0Sz8Tf5k3EVdHVayM4DoAwWlmtg==
   dependencies:
     filename-reserved-regex "^2.0.0"
     strip-outer "^1.0.1"
-    trim-repeated "^1.0.0"
-
-filenamify@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/filenamify/-/filenamify-2.1.0.tgz#88faf495fb1b47abfd612300002a16228c677ee9"
-  dependencies:
-    filename-reserved-regex "^2.0.0"
-    strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
 
 fill-range@^4.0.0:
@@ -2656,10 +2634,6 @@ fined@^1.0.1:
     object.pick "^1.2.0"
     parse-filepath "^1.0.1"
 
-finity@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/finity/-/finity-0.5.4.tgz#f2a8a9198e8286467328ec32c8bfcc19a2229c11"
-
 flagged-respawn@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-1.0.1.tgz#e7de6f1279ddd9ca9aac8a5971d618606b3aab41"
@@ -2700,6 +2674,15 @@ forever-agent@~0.6.1:
 form-data@^2.3.2, form-data@^2.3.3, form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.6"
+    mime-types "^2.1.12"
+
+form-data@^2.5.0:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
+  integrity sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
@@ -4897,15 +4880,6 @@ object.defaults@^1.1.0:
     for-own "^1.0.0"
     isobject "^3.0.0"
 
-object.entries@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/object.entries/-/object.entries-1.1.0.tgz#2024fc6d6ba246aee38bdb0ffd5cfbcf371b7519"
-  dependencies:
-    define-properties "^1.1.3"
-    es-abstract "^1.12.0"
-    function-bind "^1.1.1"
-    has "^1.0.3"
-
 object.getownpropertydescriptors@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/object.getownpropertydescriptors/-/object.getownpropertydescriptors-2.0.3.tgz#8758c846f5b407adab0f236e0986f14b051caa16"
@@ -4926,15 +4900,6 @@ object.pick@^1.2.0, object.pick@^1.3.0:
   resolved "https://registry.yarnpkg.com/object.pick/-/object.pick-1.3.0.tgz#87a10ac4c1694bd2e1cbf53591a66141fb5dd747"
   dependencies:
     isobject "^3.0.1"
-
-object.values@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/object.values/-/object.values-1.1.0.tgz#bf6810ef5da3e5325790eaaa2be213ea84624da9"
-  dependencies:
-    define-properties "^1.1.3"
-    es-abstract "^1.12.0"
-    function-bind "^1.1.1"
-    has "^1.0.3"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -5016,14 +4981,6 @@ osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-p-cancelable@*:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-2.0.0.tgz#4a3740f5bdaf5ed5d7c3e34882c6fb5d6b266a6e"
-
-p-cancelable@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-1.0.0.tgz#07e9c6d22c31f9c6784cb4f1e1454a79b6d9e2d6"
-
 p-each-series@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-each-series/-/p-each-series-1.0.0.tgz#930f3d12dd1f50e7434457a22cd6f04ac6ad7f71"
@@ -5058,17 +5015,12 @@ p-reduce@^1.0.0:
   resolved "https://registry.yarnpkg.com/p-reduce/-/p-reduce-1.0.0.tgz#18c2b0dd936a4690a529f8231f58a0fdb6a47dfa"
   integrity sha1-GMKw3ZNqRpClKfgjH1ig/bakffo=
 
-p-retry@*:
+p-retry@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/p-retry/-/p-retry-4.1.0.tgz#9ce7cef2069e84bf590df3b8ec18d740109338d6"
+  integrity sha512-oepllyG9gX1qH4Sm20YAKxg1GA7L7puhvGnTfimi31P07zSIj7SDV6YtuAx9nbJF51DES+2CIIRkXs8GKqWJxA==
   dependencies:
     "@types/retry" "^0.12.0"
-    retry "^0.12.0"
-
-p-retry@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/p-retry/-/p-retry-3.0.1.tgz#316b4c8893e2c8dc1cfa891f406c4b422bebf328"
-  dependencies:
     retry "^0.12.0"
 
 p-try@^2.0.0:
@@ -6164,7 +6116,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-strip-outer@^1.0.0, strip-outer@^1.0.1:
+strip-outer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/strip-outer/-/strip-outer-1.0.1.tgz#b2fd2abf6604b9d1e6013057195df836b8a9d631"
   dependencies:
