@@ -1976,6 +1976,11 @@ commander@^2.15.0, commander@^2.9.0, commander@~2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
 
+commander@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-4.0.1.tgz#b67622721785993182e807f4883633e6401ba53c"
+  integrity sha512-IPF4ouhCP+qdlcmCedhxX4xiGBPyigb8v5NeUp+0LyhwLgxMqyp3S0vl7TAPfS/hiP7FC3caI/PB9lTmP8r1NA==
+
 commander@~2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.6.0.tgz#9df7e52fb2a0cb0fb89058ee80c3104225f37e1d"
@@ -3171,12 +3176,13 @@ ical2json@^0.2.0:
   dependencies:
     commander "~2.6.0"
 
-ical2json@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ical2json/-/ical2json-1.2.0.tgz#32da6411280db2a1f78b30353776986b485a9c12"
+ical2json@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ical2json/-/ical2json-3.0.0.tgz#501b3b4f7960a968dee36e51702de8e0c1e5d35d"
+  integrity sha512-LAV4w1xOeNaQGcI94g/hLw7g38c0detkxzLEmHOPq9x3xDpf2fgKuHmkZZiq4gowk25M7NV7+9hO9mALJtjMcA==
   dependencies:
-    commander "^2.9.0"
-    q "^1.4.1"
+    commander "^4.0.1"
+    q "^1.5.1"
 
 iconv-lite@0.4.19:
   version "0.4.19"
@@ -5366,9 +5372,10 @@ q@2.0.x:
     pop-iterate "^1.0.1"
     weak-map "^1.0.5"
 
-q@^1.4.1:
+q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+  integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
 qbox@0.1.x:
   version "0.1.7"
