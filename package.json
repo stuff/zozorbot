@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@slack/client": "^3.14.1",
-    "async": "^3.1.0",
+    "async": "^3.2.0",
     "botbuilder-adapter-slack": "^1.0.3",
     "botkit": "0.7.4",
     "calendario": "^1.1.4",
