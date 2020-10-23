@@ -2048,10 +2048,10 @@ country-list@^2.2.0:
   resolved "https://registry.yarnpkg.com/country-list/-/country-list-2.2.0.tgz#e248338cafb97b2d86cf0784a25dceb4d52054d1"
   integrity sha512-AS21pllCp72LmUztqXPVKXK3TRyap1XlohGLqN04cXH2rFB9vo7SnH5sMnqltZPnu9ie/x1se3UuCZJbGXErfw==
 
-cronstrue@^1.84.0:
-  version "1.84.0"
-  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-1.84.0.tgz#ab4925cba456f2e176b3b0cc947285f957dde516"
-  integrity sha512-yfQowBKKZGCZ6Ia2zlpDKhT7Eq4Lq4gzFBmJTrHMNgZh+vkSvmI6NtCvXR21JM00tp6afyY04VEgHaaqlE9oIg==
+cronstrue@^1.102.0:
+  version "1.102.0"
+  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-1.102.0.tgz#7be3c224c06cd8a5773452ab8edb3d69f61a14f4"
+  integrity sha512-2xv5ceanl50ZbP2hZh5Xh0w3eUKnjbaZp4E/mUUQ98bGB1Oqx4/fWfFaMapoDqctcmEM4sTunZunsw6v7pL8dg==
 
 cross-spawn@^4.0.0:
   version "4.0.2"
