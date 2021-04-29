@@ -1,0 +1,32 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: botkit
+    versions:
+    - "> 0.7.4"
+  - dependency-name: "@slack/client"
+    versions:
+    - "> 3.14.1"
+  - dependency-name: date-fns
+    versions:
+    - 2.16.1
+    - 2.17.0
+    - 2.18.0
+    - 2.19.0
+    - 2.20.0
+    - 2.20.1
+    - 2.20.2
+    - 2.20.3
+    - 2.21.0
+  - dependency-name: cronstrue
+    versions:
+    - 1.108.0
+    - 1.109.0
+    - 1.110.0
+    - 1.111.0
